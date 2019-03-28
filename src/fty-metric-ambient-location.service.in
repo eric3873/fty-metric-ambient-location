@@ -1,0 +1,21 @@
+# This is a skeleton created by zproject.
+# You can add hand-written code here.
+
+[Unit]
+Description=fty-metric-ambient-location service
+After=network.target
+# Requires=network.target
+# Conflicts=shutdown.target
+# PartOf=fty-metric-ambient-location.target
+
+[Service]
+Type=simple
+# User=@uid@
+Environment="prefix=@prefix@"
+Environment='SYSTEMD_UNIT_FULLNAME=%n'
+ExecStart=@prefix@/bin/fty-metric-ambient-location @sysconfdir@/@PACKAGE@/fty-metric-ambient-location.cfg
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+# WantedBy=fty-metric-ambient-location.target

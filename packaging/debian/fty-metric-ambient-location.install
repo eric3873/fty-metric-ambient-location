@@ -1,0 +1,4 @@
+usr/bin/fty-metric-ambient-location
+etc/fty-metric-ambient-location/fty-metric-ambient-location.cfg
+lib/systemd/system/fty-metric-ambient-location.service
+
