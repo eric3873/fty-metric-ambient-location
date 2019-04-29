@@ -3,19 +3,20 @@
 
 [Unit]
 Description=fty-metric-ambient-location service
-After=network.target
-# Requires=network.target
-# Conflicts=shutdown.target
-# PartOf=fty-metric-ambient-location.target
+After=network.target malamute.service
+Requires=malamute.service
+PartOf=bios.target
 
 [Service]
 Type=simple
+User=bios
 # User=@uid@
+EnvironmentFile=-@prefix@/share/fty/etc/default/fty
+EnvironmentFile=-@prefix@/share/fty/etc/default/fty__%n.conf
 Environment="prefix=@prefix@"
 Environment='SYSTEMD_UNIT_FULLNAME=%n'
-ExecStart=@prefix@/bin/fty-metric-ambient-location @sysconfdir@/@PACKAGE@/fty-metric-ambient-location.cfg
+ExecStart=@prefix@/bin/fty-metric-ambient-location
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
-# WantedBy=fty-metric-ambient-location.target
+WantedBy=bios.target
