@@ -12,6 +12,9 @@
     <target name = "debian" />
     <target name = "redhat" />
     <target name = "travis" >
+        <!-- Force to use trusty because we still depend of auto_ptr :( -->
+        <option name = "dist" value = "trusty" />
+        <option name = "shadow_gcc" value = "2" />
         <!-- option name = "clangformat_implem" value = "autotools" / -->
         <option name = "use_cmake" value = "0" />
         <!-- option name = "clangformat_require_good" value = "1" / -->
@@ -79,7 +82,9 @@
     </use>
     
     <use project = "fty_shm" libname = "libfty_shm" header="fty_shm.h" min_major = "1" test = "fty_shm_test" 
-	repository = "https://github.com/42ity/fty-shm.git"/>
+	    repository = "https://github.com/42ity/fty-shm.git"
+        release = "master"
+        />
 
     <class name = "fty_ambient_location_server" >Ambient location metrics server</class>
     <main name = "fty-metric-ambient-location" service = "1">
