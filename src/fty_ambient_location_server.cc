@@ -349,7 +349,7 @@ static ambient_values_t s_compute_values (AmbientLocation* self, std::string nam
       result.out_humidity.value = NaN;
     else {
       result.out_humidity.value = humidity/n_humidity;
-      s_publish_value("average.humidity", "C", name,result.out_humidity.value, result.out_humidity.ttl);
+      s_publish_value("average.humidity", "%", name,result.out_humidity.value, result.out_humidity.ttl);
     }
     
     if(temperature == 0)
@@ -461,7 +461,8 @@ s_ambloc_actor_stream (AmbientLocation* self, zmsg_t **message_p)
     }
     mtx_ambient_hashmap.lock();
     if (streq (fty_proto_operation (bmsg), FTY_PROTO_ASSET_OP_DELETE)
-                     || !streq (fty_proto_aux_string (bmsg, FTY_PROTO_ASSET_STATUS, "active"), "active") ) {
+                     || streq (fty_proto_aux_string (bmsg, FTY_PROTO_ASSET_STATUS, "active"), "inactive")
+                     || streq (fty_proto_aux_string (bmsg, FTY_PROTO_ASSET_STATUS, "active"), "retired")) {
       s_remove_asset (self, bmsg);
     } else if (streq (fty_proto_operation (bmsg), FTY_PROTO_ASSET_OP_CREATE)
                      || streq (fty_proto_operation (bmsg), FTY_PROTO_ASSET_OP_UPDATE)) {
