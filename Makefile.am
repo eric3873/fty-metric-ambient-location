@@ -12,6 +12,7 @@ AM_CXXFLAGS = \
     -std=c++11
 
 AM_CPPFLAGS = \
+    ${fty_common_logging_CFLAGS} \
     ${libzmq_CFLAGS} \
     ${czmq_CFLAGS} \
     ${malamute_CFLAGS} \
@@ -20,7 +21,7 @@ AM_CPPFLAGS = \
     -D__STDC_FORMAT_MACROS \
     -I$(srcdir)/include
 
-project_libs = ${libzmq_LIBS} ${czmq_LIBS} ${malamute_LIBS} ${fty_proto_LIBS} ${fty_shm_LIBS}
+project_libs = ${fty_common_logging_LIBS} ${libzmq_LIBS} ${czmq_LIBS} ${malamute_LIBS} ${fty_proto_LIBS} ${fty_shm_LIBS}
 
 SUBDIRS = doc
 SUBDIRS += include
@@ -41,6 +42,7 @@ DISTCLEANFILES =
 
 if ENABLE_DIST_CMAKEFILES
 EXTRA_DIST += \
+    Findfty_common_logging.cmake \
     Findlibzmq.cmake \
     Findczmq.cmake \
     Findmalamute.cmake \

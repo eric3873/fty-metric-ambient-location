@@ -55,6 +55,7 @@ BuildRequires:  xmlto
 # "4.9 or newer".
 BuildRequires:  devtoolset-3-gcc devtoolset-3-gcc-c++
 BuildRequires:  gcc-c++ >= 4.9.0
+BuildRequires:  fty-common-logging-devel
 BuildRequires:  zeromq-devel
 BuildRequires:  czmq-devel
 BuildRequires:  malamute-devel
@@ -83,6 +84,7 @@ This package contains shared library for fty-metric-ambient-location: compute th
 Summary:        compute the ambient metrics of each location, based on their sensors metrics
 Group:          System/Libraries
 Requires:       libfty_metric_ambient_location0 = %{version}
+Requires:       fty-common-logging-devel
 Requires:       zeromq-devel
 Requires:       czmq-devel
 Requires:       malamute-devel

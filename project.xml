@@ -43,6 +43,11 @@
     <version major = "1" minor = "0" patch = "0" />
     <abi current = "0" revision = "0" age = "0" />
 
+    <use project = "fty-common-logging" libname = "libfty_common_logging"
+        header = "fty_log.h"
+        repository = "https://github.com/42ity/fty-common-logging.git"
+        test = "fty_common_logging_selftest" />
+
     <use project = "fty-proto" libname = "libfty_proto" header = "ftyproto.h" prefix = "fty_proto"
         min_major = "1" min_minor = "0" min_patch = "0"
         repository = "https://github.com/42ity/fty-proto.git"

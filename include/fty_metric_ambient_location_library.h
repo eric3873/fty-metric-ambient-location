@@ -30,6 +30,7 @@
 //  Set up environment for the application
 
 //  External dependencies
+#include <fty_log.h>
 #include <ftyproto.h>
 #include <fty_shm.h>
 

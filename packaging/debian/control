@@ -24,6 +24,7 @@ Maintainer:     fty-metric-ambient-location Developers <eatonipcopensource@eaton
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
+    libfty-common-logging-dev,
     libzmq3-dev,
     libczmq-dev,
     libmlm-dev,
@@ -47,6 +48,7 @@ Architecture: any
 Section: libdevel
 Depends:
     ${misc:Depends},
+    libfty-common-logging-dev,
     libzmq3-dev,
     libczmq-dev,
     libmlm-dev,

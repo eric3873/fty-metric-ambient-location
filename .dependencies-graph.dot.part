@@ -1,3 +1,4 @@
+   fty-metric-ambient-location -> fty-common-logging;
    fty-metric-ambient-location -> libzmq;
    fty-metric-ambient-location -> czmq;
    fty-metric-ambient-location -> malamute;
