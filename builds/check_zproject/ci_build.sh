@@ -13,7 +13,7 @@ git clone --quiet --depth 1 https://github.com/42ity/fty-common-logging.git fty-
 git clone --quiet --depth 1 https://github.com/zeromq/libzmq.git libzmq
 git clone --quiet --depth 1 https://github.com/zeromq/czmq.git czmq
 git clone --quiet --depth 1 https://github.com/zeromq/malamute.git malamute
-git clone --quiet --depth 1 -b master https://github.com/42ity/fty-proto.git fty-proto
+git clone --quiet --depth 1 https://github.com/42ity/fty-proto.git fty-proto
 git clone --quiet --depth 1 https://github.com/42ity/fty-shm.git fty_shm
 cd -
 
