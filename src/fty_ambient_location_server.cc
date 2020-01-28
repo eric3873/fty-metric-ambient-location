@@ -472,18 +472,43 @@ s_ambloc_actor_stream (AmbientLocation* self, zmsg_t **message_p)
 
     log_debug("METRIC SENSOR message (asset: %s, type: %s)", sensor_name.c_str(), type.c_str());
 
+    bool metric_in_cache = false;
+
     mtx_ambient_hashmap.lock();
     if(self->cache.count(sensor_name) != 0) {
       if(type.find("humidity") != std::string::npos) {
         s_remove_from_cache(self,sensor_name, AMBIENT_LOCATION_TYPE_HUMIDITY);
         self->cache.at(sensor_name).second.first = fty_proto_dup(bmsg);
+        metric_in_cache = true;
       }
       else if(type.find("temperature") != std::string::npos) {
         s_remove_from_cache(self,sensor_name, AMBIENT_LOCATION_TYPE_TEMP);
         self->cache.at(sensor_name).second.second = fty_proto_dup(bmsg);
+        metric_in_cache = true;
       }
     }
     mtx_ambient_hashmap.unlock();
+
+    // PQSWMBT-3723: if sensor metric is handled, publish it in shared memory.
+    // metric (or quantity) ex.: 'humidity.default@sensor-241', 'temperature.default@sensor-372'
+    if (metric_in_cache) {
+      const char *value_s = fty_proto_value(bmsg);
+      double value;
+      int r = sscanf((value_s ? value_s : ""), "%lf", &value);
+      if (r == 1) {
+          // here, sensor metric type is like 'temperature.N' or 'humidity.N'
+          // where N is the index (offset 0) related to its device owner (edpu, ups).
+          // we normalize the metric quantity to 'default'.
+          const char *quantity = NULL;
+          if (type.find("temperature") != std::string::npos)
+            quantity = "temperature.default";
+          else if (type.find("humidity") != std::string::npos)
+            quantity = "humidity.default";
+          if (quantity)
+            s_publish_value(quantity, fty_proto_unit(bmsg), sensor_name.c_str(), value, fty_proto_ttl(bmsg));
+      }
+    }
+    // end PQSWMBT-3723
   }
   else if (fty_proto_id (bmsg) == FTY_PROTO_ASSET) {
 
