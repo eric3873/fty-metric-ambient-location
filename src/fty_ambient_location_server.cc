@@ -179,7 +179,7 @@ static void s_publish_value(std::string type, std::string unit, std::string name
   fty_proto_set_time(n_met, std::time (NULL));
 
   char *aux_log = NULL;
-  asprintf(&aux_log, "%s@%s (value: %s%s, ttl: %lu)",
+  asprintf(&aux_log, "%s@%s (value: %s%s, ttl: %u)",
      fty_proto_type(n_met),
      fty_proto_name(n_met),
      fty_proto_value(n_met),
