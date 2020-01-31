@@ -31,7 +31,7 @@
 int main (int argc, char *argv [])
 {
     bool verbose = false;
-    ftylog_setInstance("fty-metric-ambient-location","");
+    ftylog_setInstance("fty-metric-ambient-location", FTY_COMMON_LOGGING_DEFAULT_CFG);
     int argn;
     for (argn = 1; argn < argc; argn++) {
         if (streq (argv [argn], "--help")
@@ -55,8 +55,8 @@ int main (int argc, char *argv [])
     {      
         ftylog_setVeboseMode(ftylog_getInstance());
     }
-    if (verbose)
-        zsys_info ("fty_metric_ambient_location - Metrics calculator");
+
+    log_info ("fty_metric_ambient_location - starting...");
 
     zactor_t *server = zactor_new (fty_ambient_location_server, NULL);
 
@@ -64,6 +64,8 @@ int main (int argc, char *argv [])
     zstr_sendx (server, "CONSUMER", FTY_PROTO_STREAM_METRICS_SENSOR, ".*", NULL);
     zstr_sendx (server, "CONSUMER", FTY_PROTO_STREAM_ASSETS, ".*", NULL);
     zstr_sendx (server, "START", NULL);
+
+    log_info ("fty_metric_ambient_location - started...");
 
     while (true) {
         char *str = zstr_recv (server);
@@ -77,5 +79,8 @@ int main (int argc, char *argv [])
         }
     }
     zactor_destroy (&server);
+
+    log_info ("fty_metric_ambient_location - ended");
+
     return 0;
 }
