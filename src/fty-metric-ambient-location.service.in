@@ -7,6 +7,10 @@ After=network.target malamute.service
 Requires=malamute.service
 PartOf=bios.target
 
+After=fty-asset.service
+Requires=fty-asset.service
+BindsTo=fty-asset.service
+
 [Service]
 Type=simple
 User=bios
