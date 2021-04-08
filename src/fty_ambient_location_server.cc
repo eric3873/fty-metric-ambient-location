@@ -702,11 +702,11 @@ fty_ambient_location_server_test (bool verbose)
     zstr_sendx (server, "BIND", endpoint, NULL);
 
     // Note: If your selftest reads SCMed fixture data, please keep it in
-    // src/selftest-ro; if your test creates filesystem objects, please
-    // do so under src/selftest-rw. They are defined below along with a
+    // selftest-ro; if your test creates filesystem objects, please
+    // do so under selftest-rw. They are defined below along with a
     // usecase (asert) to make compilers happy.
-    const char *SELFTEST_DIR_RO = "src/selftest-ro";
-    const char *SELFTEST_DIR_RW = "src/selftest-rw";
+    const char *SELFTEST_DIR_RO = "selftest-ro";
+    const char *SELFTEST_DIR_RW = "selftest-rw";
     assert (SELFTEST_DIR_RO);
     assert (SELFTEST_DIR_RW);
     fty_shm_set_test_dir(SELFTEST_DIR_RW);

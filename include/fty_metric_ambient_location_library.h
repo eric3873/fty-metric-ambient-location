@@ -117,8 +117,7 @@ extern "C" {
 #endif
 
 //  Self test for private classes
-FTY_METRIC_AMBIENT_LOCATION_EXPORT void
-    fty_metric_ambient_location_private_selftest (bool verbose, const char *subtest);
+void fty_metric_ambient_location_private_selftest (bool verbose, const char *subtest);
 
 #ifdef __cplusplus
 }

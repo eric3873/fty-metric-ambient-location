@@ -37,6 +37,9 @@
 void
 fty_metric_ambient_location_private_selftest (bool verbose, const char *subtest)
 {
+    // Tests for stable private classes:
+    if (streq (subtest, "$ALL") || streq (subtest, "server_test"))
+        fty_ambient_location_server_test (verbose);
 }
 /*
 ################################################################################
