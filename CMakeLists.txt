@@ -14,16 +14,11 @@ etn_target(exe ${PROJECT_NAME}
     SOURCES
         src/fty_metric_ambient_location.cc
         src/fty_ambient_location_server.cc
-    PUBLIC_INCLUDE_DIR
-        include
-    PUBLIC
-        *.h
     USES_PRIVATE
         fty_common_logging
         fty_proto
         fty_shm
         libmlm
-    PRIVATE
 )
 
 #install resources files
