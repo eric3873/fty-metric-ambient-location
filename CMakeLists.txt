@@ -15,6 +15,7 @@ etn_target(exe ${PROJECT_NAME}
         src/fty_metric_ambient_location.cc
         src/fty_ambient_location_server.cc
     USES_PRIVATE
+        czmq
         fty_common_logging
         fty_proto
         fty_shm
@@ -40,6 +41,7 @@ if (BUILD_TESTING)
             src/fty_ambient_location_server.cc
         PREPROCESSOR -DCATCH_CONFIG_FAST_COMPILE
         USES
+            czmq
             fty_common_logging
             fty_proto
             fty_shm
