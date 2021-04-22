@@ -26,6 +26,7 @@ Build-Depends: debhelper (>= 9),
     cmake (>=3.0),
     fty-cmake-dev,
     pkg-config,
+    libsodium-dev
     libczmq-dev (>= 3.0.2),
     libmlm-dev (>= 1.0.0),
     libfty-common-logging-dev,
