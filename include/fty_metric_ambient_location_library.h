@@ -33,6 +33,7 @@
 #include <fty_log.h>
 #include <ftyproto.h>
 #include <fty_shm.h>
+#include <malamute.h>
 
 //  FTY_METRIC_AMBIENT_LOCATION version macros for compile-time API detection
 #define FTY_METRIC_AMBIENT_LOCATION_VERSION_MAJOR 1
