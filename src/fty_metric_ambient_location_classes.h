@@ -27,7 +27,6 @@
 #define FTY_METRIC_AMBIENT_LOCATION_CLASSES_H_INCLUDED
 
 //  Platform definitions, must come first
-#include "platform.h"
 
 //  External API
 #include "../include/fty_metric_ambient_location.h"

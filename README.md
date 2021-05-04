@@ -6,10 +6,10 @@ The default configuration values are in fty-ambient-location.cfg file (section d
 ## How to build
 To build fty-metric-ambient-location project run:
 ```bash
-./autogen.sh [clean]
-./configure
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=usr -DBUILD_TESTING=On ..
 make
-make check # to run self-test
+sudo make install
 ```
 ## How to run
 

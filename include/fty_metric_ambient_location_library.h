@@ -33,6 +33,7 @@
 #include <fty_log.h>
 #include <ftyproto.h>
 #include <fty_shm.h>
+#include <malamute.h>
 
 //  FTY_METRIC_AMBIENT_LOCATION version macros for compile-time API detection
 #define FTY_METRIC_AMBIENT_LOCATION_VERSION_MAJOR 1
@@ -117,8 +118,7 @@ extern "C" {
 #endif
 
 //  Self test for private classes
-FTY_METRIC_AMBIENT_LOCATION_EXPORT void
-    fty_metric_ambient_location_private_selftest (bool verbose, const char *subtest);
+void fty_metric_ambient_location_private_selftest (bool verbose, const char *subtest);
 
 #ifdef __cplusplus
 }
