@@ -26,7 +26,9 @@
 @end
 */
 
-#include "fty_metric_ambient_location_classes.h"
+#include "fty_ambient_location_server.h"
+#include <fty_proto.h>
+#include <fty_log.h>
 
 int main (int argc, char *argv [])
 {
