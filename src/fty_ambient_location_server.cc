@@ -549,7 +549,7 @@ static void s_handle_actor_stream(AmbientLocation* self, zmsg_t** message_p)
             double value = 0;
             int r = sscanf((value_s ? value_s : ""), "%lf", &value);
             if (r != 1) {
-                log_error("parse sensor float value failed (%s/%s, value: '%s')", sensor_name, type.c_str(), value);
+                log_error("parse sensor float value failed (%s/%s, value: '%s')", sensor_name, type.c_str(), value_s);
             } else {
                 // here, sensor metric type is like 'temperature.N' or 'humidity.N'
                 // where N is the index (offset 0) related to its device owner (epdu, ups, ...).
