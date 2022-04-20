@@ -21,31 +21,5 @@
 
 #pragma once
 #include <czmq.h>
-#include <fty_proto.h>
-#include <malamute.h>
-#include <string>
-#include <unordered_map>
-#include <vector>
 
-class AmbientLocation
-{
-public:
-    AmbientLocation();
-    ~AmbientLocation();
-
-    using Containers     = std::unordered_map<std::string, std::string>;
-    using ContainersList = std::unordered_map<std::string, std::vector<std::string>>;
-    using Cache       = std::unordered_map<std::string, std::pair<std::string, std::pair<fty_proto_t*, fty_proto_t*>>>;
-    using Datacenters = std::vector<std::string>;
-
-    int            timeout_ms          = {};
-    mlm_client_t*  client              = nullptr;
-    zactor_t*      ambient_calculation = nullptr;
-    Containers     containers;
-    ContainersList m_list_contents;
-    Cache          cache;
-    Datacenters    datacenters;
-};
-
-void ambient_location_calculation(zsock_t* pipe, void* args);
 void fty_ambient_location_server(zsock_t* pipe, void* args);
