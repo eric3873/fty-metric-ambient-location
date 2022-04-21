@@ -449,9 +449,23 @@ static void s_ambloc_actor_stream(AmbientLocation* self, zmsg_t** message_p)
     }
 
     if (streq(mlm_client_address(self->client), FTY_PROTO_STREAM_METRICS_SENSOR)) {
+        // should be a metric here
+        if (fty_proto_id(bmsg) != FTY_PROTO_METRIC) {
+            log_debug("Get a stream message that is not a metric");
+            fty_proto_destroy(&bmsg);
+            return;
+        }
 
+        // get sensor name
         std::string sensor_name = fty_proto_aux_string(bmsg, "sname", "");
-        std::string type        = fty_proto_type(bmsg);
+        // get type
+        auto s_type = fty_proto_type(bmsg);
+        if (!s_type) {
+            fty_proto_destroy(&bmsg);
+            log_error("Get a stream message that has no type: %s", sensor_name.c_str());
+            return;
+        }
+        std::string type = s_type;
 
         log_debug("METRIC SENSOR message (asset: %s, type: %s)", sensor_name.c_str(), type.c_str());
 
