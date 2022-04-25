@@ -30,10 +30,14 @@
 #include <fty_proto.h>
 #include <fty_log.h>
 
+#define AGENT_NAME "fty-metric-ambient-location"
+#define MLM_ENDPOINT "ipc://@/malamute"
+
 int main (int argc, char *argv [])
 {
+    ftylog_setInstance(AGENT_NAME, FTY_COMMON_LOGGING_DEFAULT_CFG);
+
     bool verbose = false;
-    ftylog_setInstance("fty-metric-ambient-location", FTY_COMMON_LOGGING_DEFAULT_CFG);
     int argn;
     for (argn = 1; argn < argc; argn++) {
         if (streq (argv [argn], "--help")
@@ -52,37 +56,39 @@ int main (int argc, char *argv [])
             return 1;
         }
     }
-    //  Insert main code here
-    if (verbose)
-    {      
-        ftylog_setVeboseMode(ftylog_getInstance());
+
+    if (verbose) {
+        ftylog_setVerboseMode(ftylog_getInstance());
     }
 
-    log_info ("fty_metric_ambient_location - starting...");
+    log_info ("%s - starting...", AGENT_NAME);
 
     zactor_t *server = zactor_new (fty_ambient_location_server, NULL);
+    if (!server) {
+        log_error("crate server failed");
+        return EXIT_FAILURE;
+    }
 
-    zstr_sendx (server, "CONNECT", "ipc://@/malamute", "fty-metric-ambient-location", NULL);
+    zstr_sendx (server, "CONNECT", MLM_ENDPOINT, AGENT_NAME, NULL);
     zstr_sendx (server, "CONSUMER", FTY_PROTO_STREAM_METRICS_SENSOR, ".*", NULL);
     zstr_sendx (server, "CONSUMER", FTY_PROTO_STREAM_ASSETS, ".*", NULL);
     zstr_sendx (server, "START", NULL);
 
-    log_info ("fty_metric_ambient_location - started...");
+    log_info ("%s - started", AGENT_NAME);
 
-    while (true) {
-        char *str = zstr_recv (server);
-        if (str) {
-            puts (str);
-            zstr_free (&str);
-        }
-        else {
-            log_info ("Interrupted ...");
+    // Main loop, accept any message back from server
+    // copy from src/malamute.c under MPL license
+    while (!zsys_interrupted) {
+        char* msg = zstr_recv(server);
+        if (!msg)
             break;
-        }
+        log_trace("%s: recv msg '%s'", AGENT_NAME, msg);
+        zstr_free(&msg);
     }
+
     zactor_destroy (&server);
 
-    log_info ("fty_metric_ambient_location - ended");
+    log_info ("%s - ended", AGENT_NAME);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

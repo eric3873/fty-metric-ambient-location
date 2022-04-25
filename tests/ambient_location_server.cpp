@@ -1,6 +1,7 @@
 #include "src/fty_ambient_location_server.h"
 #include <catch2/catch.hpp>
 #include <fty_shm.h>
+#include <malamute.h>
 
 //  --------------------------------------------------------------------------
 //  Self test of this class
