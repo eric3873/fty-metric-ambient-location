@@ -603,7 +603,7 @@ static void s_handle_actor_stream(AmbientLocation* self, zmsg_t** message_p)
 
         mtx_ambient_hashmap.lock();
         if (streq(fty_proto_operation(bmsg), FTY_PROTO_ASSET_OP_DELETE)
-            || !streq(fty_proto_aux_string(bmsg, FTY_PROTO_ASSET_STATUS, ""), "active")
+            || !streq(fty_proto_aux_string(bmsg, FTY_PROTO_ASSET_STATUS, "active"), "active")
         ){
             s_remove_asset(self, bmsg);
         }
